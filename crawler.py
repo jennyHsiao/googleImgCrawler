@@ -66,10 +66,12 @@ number = args.number
 keyword = args.keyword
 path = args.path
 
-browser = webdriver.Chrome()
-
 if not os.path.exists(keyword): #create folder to save download images
-	os.makedirs(path+"\\"+keyword) 
+	os.makedirs(path+"\\"+keyword)
+else:
+	print "The folder "+path+"\\"+keyword+ " is already exists. Please change a path for saving images!"
+	raise SystemExit
+
 os.chdir(path+"\\"+keyword)
 
 if ' ' in keyword: #keyword string manipulation
@@ -82,6 +84,7 @@ else:
 url = "https://www.google.com.tw/search?&tbm=isch&q="+query
 print (url)
 
+browser = webdriver.Chrome()
 browser.get(url)
 if args.option:
 	option = args.option
@@ -101,15 +104,8 @@ if(number>100 or number==0):
 	        break
 	    lastHeight = newHeight
 
-	# while scroll<10:
-	# 	print "scroll down times:"+str(scroll),(nowcnt%100==0), scroll<1
-	# 	scroll = scroll+1
 	img_urls = browser.find_elements_by_xpath("//a[@class='rg_l']")
 	g_img_urls = browser.find_elements_by_xpath("//img[@class='rg_i']")
-
-	# 	nowcnt = len(img_urls)
-	# 	browser.execute_script("window.scrollTo(0, document.body.scrollHeight);") #scroll down to bottom to load the whole results
-	# time.sleep(5)	
 else:
 	img_urls = browser.find_elements_by_xpath("//a[@class='rg_l']")
 	g_img_urls = browser.find_elements_by_xpath("//img[@class='rg_i']")
@@ -148,9 +144,10 @@ while number>idx:
 								# urllib.urlretrieve(imgurl, filename)
 								text_msg = text_msg+filename+"\n"						
 								count = count+1 # get img succefully, count++
-							except  urllib.ContentTooShortError as e: #get thumbnail
+							except  Exception as e: #get thumbnail
 								gImg = g_img_urls[idx]
 								gquery = gImg.get_attribute('src')
+								filename=None
 								if gquery!=None:
 									filename = getThumbnail(gquery, count)
 									text_msg = text_msg+filename+"\n"
