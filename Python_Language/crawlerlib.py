@@ -4,6 +4,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 import time
 def crawlerOption(browser, option):
+	option_msg=''
 	if option!=None:
 		options = option.split(';')
 		try:
@@ -41,6 +42,8 @@ def crawlerOption(browser, option):
 					elif 'f' in o:
 						browser.find_element_by_id('sur_f').click() # labeled for noncommercial reuse
 		except Exception as e:
+			option_msg="EXCEPTION: ", e,"\n"
 			print "EXCEPTION: ", e,"\n"
 		finally:
-			print "with no option setting"
+			if option_msg!='':
+				print str(option_msg)+"With no option setting...\n"

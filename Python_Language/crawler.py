@@ -105,17 +105,17 @@ if(number>100 or number==0):
 	    lastHeight = newHeight
 
 	img_urls = browser.find_elements_by_xpath("//a[@class='rg_l']")
-	g_img_urls = browser.find_elements_by_xpath("//img[@class='rg_i']")
+	g_img_urls = browser.find_elements_by_xpath("//img[contains(@class, 'rg_i')]")
 else:
 	img_urls = browser.find_elements_by_xpath("//a[@class='rg_l']")
-	g_img_urls = browser.find_elements_by_xpath("//img[@class='rg_i']")
+	g_img_urls = browser.find_elements_by_xpath("//img[contains(@class, 'rg_i')]")
 
 HttpsGeoDomain = "https://www.google.com.tw/imgres?imgurl"
 HttpGeoDomain = "http://www.google.com.tw/imgres?imgurl"
 
 file = open('imgurl.txt', 'a')
 count = len(os.listdir(".")) - 1
-print ("#reults = "+ str(len(img_urls)))
+print ("#reults = "+ str(len(img_urls))+"Gimg_urls="+str(len(g_img_urls)))
 if number==0:
 	number = len(img_urls)
 idx = 0;
