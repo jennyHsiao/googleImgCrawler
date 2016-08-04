@@ -45,5 +45,5 @@ def crawlerOption(browser, option):
 			option_msg="EXCEPTION: ", e,"\n"
 			print "EXCEPTION: ", e,"\n"
 		finally:
-			if option_msg!='':
-				print str(option_msg)+"With no option setting...\n"
+			if option_msg!='\n':
+				print str(option_msg)+" With no option setting/ incomplete setting...\n"
