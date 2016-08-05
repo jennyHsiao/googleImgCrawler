@@ -66,11 +66,11 @@ number = args.number
 keyword = args.keyword
 path = args.path
 
-if not os.path.exists(keyword): #create folder to save download images
-	os.makedirs(path+"\\"+keyword)
-else:
+if os.path.exists(path+"\\"+keyword): #create folder to save download images
 	print "The folder "+path+"\\"+keyword+ " is already exists. Please change a path for saving images!"
 	raise SystemExit
+else:
+	os.makedirs(path+"\\"+keyword)
 
 os.chdir(path+"\\"+keyword)
 
@@ -90,6 +90,7 @@ if args.option:
 	option = args.option
 	crawlerlib.crawlerOption(browser, option) #-options setting
 
+# scroll down the web page for getting more results
 pause = 0
 if(number>100 or number==0):
 	# print "number==0"
