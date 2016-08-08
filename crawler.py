@@ -58,7 +58,7 @@ parser.add_argument("-o", "--option", help="Optinal request = "+
 
 args = parser.parse_args()
 
-if not((args.number+1) and args.keyword and args.path):
+if not(args.keyword and args.path) or args.number==None:
 	parser.error('No action requested, add -keyword, -path and -number')
 
 number = args.number
